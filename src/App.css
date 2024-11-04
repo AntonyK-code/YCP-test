@@ -1,70 +1,85 @@
 /* App.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
 
 .container {
-  width: 80%;
+  max-width: 900px;
   margin: auto;
-  background: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
 }
 
-h1 {
+.header-title {
+  color: #2F4F2F;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-top: 20px;
   text-align: center;
-  color: #333;
 }
 
-form {
+.description-text {
+  color: #555;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tabs {
   display: flex;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-input[type="email"], input[type="password"] {
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  flex: 1;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+.tab-button {
+  padding: 8px 16px;
   border: none;
-  border-radius: 5px;
+  background-color: #f1f1f1;
   cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-button:hover {
-  background-color: #0056b3;
+.tab-button.active {
+  background-color: #2F4F2F;
+  color: white;
 }
 
-.resource-toolbox {
-  margin-top: 20px;
-}
-.container {
-  max-width: 900px;
+.tab-button:hover {
+  background-color: #3A6B35;
+  color: white;
 }
 
-.bg-light {
-  background-color: #f8f9fa !important;
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }
 
 .card {
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s;
 }
 
-.nav-link {
-  cursor: pointer;
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: #2F4F2F;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+/* In App.css */
+
+.main-title {
+  color: #006400; /* Dark green color */
+  font-weight: bold;
+  font-size: 2.5rem; /* Adjust size as needed */
+  text-align: center;
 }

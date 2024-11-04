@@ -1,49 +1,53 @@
 import React, { useState } from 'react';
-import { auth } from './firebase'; // Import the Firebase auth service
-import { signInWithEmailAndPassword } from 'firebase/auth'; // Import the signInWithEmailAndPassword function
+import { auth } from './firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import './Login.css';
 
 function Login({ onAuthSuccess }) {
-  const [email, setEmail] = useState(''); // State for email
-  const [password, setPassword] = useState(''); // State for password
-  const [error, setError] = useState(''); // State for handling errors
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log('User logged in:', userCredential.user);
-        setError(''); // Clear any previous errors
-        onAuthSuccess(); // Notify parent component that login was successful
-      })
-      .catch((error) => {
-        console.error('Error logging in:', error.message);
-        setError(error.message); // Display error message to the user
-      });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      onAuthSuccess();
+      alert("Login successful!");
+    } catch (error) {
+      setError("Incorrect email or password.");
+    }
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} className="login-form">
+      <div className="input-group">
+        <span className="icon">✉️</span>
         <input
           type="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
           required
         />
+      </div>
+
+      <div className="input-group">
+        <span className="icon">🔒</span>
         <input
           type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
           required
         />
-        <button type="submit">Login</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+      </div>
+
+      {error && <p className="text-danger">{error}</p>}
+
+      <button type="submit" className="login-button">Login</button>
+    </form>
   );
 }
 
 export default Login;
-

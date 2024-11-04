@@ -1,0 +1,15 @@
+.highlights-section {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #e0f7f9;
+}
+
+.highlights-section h3 {
+  color: #3A6B35;
+}
+
+.highlights-section ul {
+  list-style-type: none;
+  padding: 0;
+}

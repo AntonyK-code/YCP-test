@@ -1,48 +1,100 @@
 import React, { useState } from 'react';
-import { auth } from './firebase'; // Import the Firebase auth service
-import { createUserWithEmailAndPassword } from 'firebase/auth'; // Import the createUserWithEmailAndPassword function
+import { auth } from './firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import './Register.css';
 
-function Register({ onAuthSuccess }) {
+function Register() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [agreeTerms, setAgreeTerms] = useState(false);
   const [error, setError] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password) // Updated for the modular syntax
-      .then((userCredential) => {
-        console.log('User registered:', userCredential.user);
-        setError('');
-        onAuthSuccess(); // Notify parent component that registration was successful
-      })
-      .catch((error) => {
-        console.error('Error registering user:', error.message);
-        setError(error.message);
-      });
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    if (!agreeTerms) {
+      setError("You must agree to the terms of service");
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Registration successful!");
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
-    <div>
-      <form onSubmit={handleRegister}>
+    <form onSubmit={handleRegister} className="register-form">
+      <h2 className="form-heading">Sign up</h2>
+
+      <div className="input-group">
+        <span className="icon">👤</span>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="input-group">
+        <span className="icon">✉️</span>
         <input
           type="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
           required
         />
+      </div>
+
+      <div className="input-group">
+        <span className="icon">🔒</span>
         <input
           type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
           required
         />
-        <button type="submit">Register</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+      </div>
+
+      <div className="input-group">
+        <span className="icon">🔒</span>
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="terms">
+        <input
+          type="checkbox"
+          checked={agreeTerms}
+          onChange={(e) => setAgreeTerms(e.target.checked)}
+          required
+        />
+        <span>
+          I agree to all statements in <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of service</a>
+        </span>
+      </div>
+
+      {error && <p className="text-danger">{error}</p>}
+
+      <button type="submit" className="register-button">Register</button>
+    </form>
   );
 }
 
 export default Register;
+
