@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Youth-Connect-Platform/static/css/main.28245e5a.css",
+    "main.js": "/Youth-Connect-Platform/static/js/main.6812721c.js",
+    "static/js/453.e9139827.chunk.js": "/Youth-Connect-Platform/static/js/453.e9139827.chunk.js",
+    "index.html": "/Youth-Connect-Platform/index.html",
+    "main.28245e5a.css.map": "/Youth-Connect-Platform/static/css/main.28245e5a.css.map",
+    "main.6812721c.js.map": "/Youth-Connect-Platform/static/js/main.6812721c.js.map",
+    "453.e9139827.chunk.js.map": "/Youth-Connect-Platform/static/js/453.e9139827.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28245e5a.css",
+    "static/js/main.6812721c.js"
+  ]
+}
